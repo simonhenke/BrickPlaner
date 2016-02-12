@@ -5,10 +5,16 @@ import Field from './Field';
 import { ItemTypes } from './Constants';
 import { DropTarget } from 'react-dnd';
 import { moveBrick } from './Game';
+import { addBrick } from './Game';
 
 const fieldTarget = {
   drop(props, monitor) {
-    moveBrick(props.fieldIndex, props.rowIndex, monitor.getItem());
+    if(monitor.getItem().isNew){
+      addBrick(props.fieldIndex, props.rowIndex, monitor.getItem(),false);
+    }else{
+      moveBrick(props.fieldIndex, props.rowIndex, monitor.getItem());
+    }
+    
   }
 };
 

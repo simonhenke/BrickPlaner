@@ -2,6 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import Row from './Row';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import { getAvailableBricks } from './Game';
+import { getAvailableHalfBricks } from './Game';
+import BrickSet from './BrickSet'
 
 class Board extends Component {
   render() {
@@ -22,6 +25,10 @@ class Board extends Component {
           {days}
         </div>
         {rows}
+
+        <BrickSet 
+          bricks={getAvailableBricks()} 
+          halfbricks={getAvailableHalfBricks()} />
       </div>
     );
   }
@@ -29,13 +36,16 @@ class Board extends Component {
   renderDay(index){
     var name;
     switch(index){
-      case 0: name ="Montag"; break;  
-      case 1: name ="Dienstag"; break;  
-      case 2: name ="Mittwoch"; break;  
-      case 3: name ="Donnerstag"; break;  
-      case 4: name ="Freitag"; break;  
+      case 0: name =["Montag","Mo"]; break;  
+      case 1: name =["Dienstag","Di"]; break;  
+      case 2: name =["Mittwoch","Mi"]; break;  
+      case 3: name =["Donnerstag","Do"]; break;  
+      case 4: name =["Freitag","Fr"]; break;  
     }
-    return <div key={index} className="dayField">{name}</div>
+    return <div key={index} className="dayField">
+             <span>{name[0]}</span>
+             <span>{name[1]}</span>
+            </div>
   }
 
   renderRow(index) {
